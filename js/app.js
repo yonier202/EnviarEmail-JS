@@ -14,12 +14,15 @@ document.addEventListener("DOMContentLoaded", function(){
     function validar(e) {
         if (e.target.value.trim()==="") {
             mostrarAlerta(`el campo ${e.target.id} es obligatorio`, e.target.parentElement);
-        }else{
-            console.log('Lleno');
+            return
         }
+        limpiarAlerta(e.target.parentElement);
     }
 
     function mostrarAlerta(mj, posicion) {
+
+        //Si ya existe una alerta
+        limpiarAlerta(posicion) 
         const error = document.createElement("P");
         error.textContent = mj;
         error.classList.add("bg-red-600", "text-white", "p-2", "text-center");
@@ -27,6 +30,13 @@ document.addEventListener("DOMContentLoaded", function(){
         //inyectar ene el HTML
 
         posicion.appendChild(error);
+    }
+
+    function limpiarAlerta(referencia){
+        const alerta = referencia.querySelector('.bg-red-600');
+        if (alerta) {
+            alerta.remove();
+        }
     }
 
 });
