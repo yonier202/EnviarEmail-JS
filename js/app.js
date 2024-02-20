@@ -15,11 +15,13 @@ document.addEventListener("DOMContentLoaded", function(){
     const btnSubmit=document.querySelector('#formulario button[type="submit"]');
     const btnReset=document.querySelector('#formulario button[type="reset"]');
     const spinner=document.querySelector('#spinner');
+    const cc=document.querySelector('#cc');
 
 
     inputEmail.addEventListener("blur", validar);
     inputAsunto.addEventListener("blur", validar);
     inputMensaje.addEventListener("blur", validar);
+    cc.addEventListener("blur", validarCc);
 
     Formulario.addEventListener("submit", enviarEmail);
     
@@ -78,6 +80,18 @@ document.addEventListener("DOMContentLoaded", function(){
 
         comprobarInputs();
     }
+    function validarCc(e) {
+        limpiarAlerta(e.target.parentElement);
+        if (e.target.value.trim()!=="") {
+            if (!validarEmail(e.target.value)){
+                mostrarAlerta(`el Email es Invalido`, e.target.parentElement);
+                comprobarInputs();
+            }    
+        }
+
+    }
+
+
 
     function mostrarAlerta(mj, posicion) {
 
